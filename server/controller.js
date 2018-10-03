@@ -9,5 +9,11 @@ module.exports = {
     req.app.get('db').create_product([name, price, img]).then( () => {
       res.status(200).send();
     })
+  },
+  delete: (req, res) => {
+    const deleteId = req.params.id;
+    req.app.get('db').delete_product([deleteId]).then( () => {
+      res.status(200).send();
+    })
   }
 }

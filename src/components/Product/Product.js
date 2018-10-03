@@ -1,7 +1,7 @@
 import React from 'react';
 
 function Product(props) {
-  const {name, price, img} = props;
+  const {name, price, img, id} = props;
   return(
     <div>
       Name: {name}
@@ -9,6 +9,7 @@ function Product(props) {
       Price: {price}
       <br />
       <img src={img} alt="product" height="100px" width="100px" />
+      <button onClick={() => props.deleteProduct(id)}>Delete</button>
     </div>
   )
 }

@@ -23,7 +23,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Dashboard inventory={this.state.inventory} />
+        <Dashboard inventory={this.state.inventory} getProducts={this.componentDidMount()} />
         <Form getProducts={this.componentDidMount()}/>
         <Header />
       </div>
