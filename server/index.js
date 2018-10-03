@@ -10,6 +10,14 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
+//Stuff to make errors go away
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+ next();
+});
+
 massive(process.env.DATABASE_STRING)
   .then(db => {
     app.set('db', db)

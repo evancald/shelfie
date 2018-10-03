@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 class Form extends Component {
   constructor() {
@@ -6,7 +7,7 @@ class Form extends Component {
     this.state = {
       name: "",
       price: 0,
-      imgurl: ""
+      img: ""
     }
   }
 
@@ -15,7 +16,15 @@ class Form extends Component {
   }
 
   resetInputs = () => {
-    this.setState({name: "", price: 0, imgurl: ""});
+    this.setState({name: "", price: 0, img: ""});
+  }
+
+  onSubmit = () => {
+    axios.post('http://localhost:8080/api/product', {
+      name: this.state.name,
+      price: this.state.price,
+      img: this.state.img
+    }).then(this.props.getProducts, this.resetInputs());
   }
 
   render() {
@@ -24,9 +33,9 @@ class Form extends Component {
         Form
         <input onChange={(e) => this.handleChange(e.target.value, 'name')} value={this.state.name} placeholder="Name"></input>
         <input onChange={(e) => this.handleChange(e.target.value, 'price')} value={this.state.price} placeholder="Price"></input>
-        <input onChange={(e) => this.handleChange(e.target.value, 'imgurl')} value={this.state.imgurl} placeholder="Img URL"></input>
+        <input onChange={(e) => this.handleChange(e.target.value, 'img')} value={this.state.img} placeholder="Img URL"></input>
         <button onClick={this.resetInputs}>Cancel</button>
-        <button>Add to Inventory</button>
+        <button onClick={this.onSubmit}>Add to Inventory</button>
       </div>
     )
   }
