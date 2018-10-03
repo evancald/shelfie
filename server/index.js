@@ -21,6 +21,7 @@ massive(process.env.DATABASE_STRING)
 
 //Endpoints
 app.get('/api/inventory', controller.read);
+app.post('/api/product', controller.create);
 
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
