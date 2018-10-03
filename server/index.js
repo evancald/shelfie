@@ -17,6 +17,9 @@ massive(process.env.DATABASE_STRING)
     console.log('database connection error', err);
   })
 
+//Endpoints
+app.get('/api/inventory', controller.read);
+
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
 })
