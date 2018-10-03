@@ -1,9 +1,14 @@
 import React from 'react';
 
-function Product() {
+function Product(props) {
+  const {name, price, imgurl} = props;
   return(
     <div>
-      Product
+      Name: {name}
+      <br />
+      Price: {price}
+      <br />
+      <img src={imgurl} alt="product" height="100px" width="100px" />
     </div>
   )
 }
