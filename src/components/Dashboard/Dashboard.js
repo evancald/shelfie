@@ -9,10 +9,11 @@ class Dashboard extends Component {
   }
 
   render() {
+    const {updateSelected} = this.props;
     const inventory = this.props.inventory.map((product, i) => {
       return (
         <div key={i}>
-          <Product name={product.name} price={product.price} img={product.img} id={product.id} deleteProduct={this.deleteProduct}/>
+          <Product name={product.name} price={product.price} img={product.img} id={product.id} deleteProduct={this.deleteProduct} updateSelected={updateSelected}/>
         </div>
       )
     })

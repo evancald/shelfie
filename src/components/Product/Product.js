@@ -10,6 +10,7 @@ function Product(props) {
       <br />
       <img src={img} alt="product" height="100px" width="100px" />
       <button onClick={() => props.deleteProduct(id)}>Delete</button>
+      <button onClick={() => props.updateSelected(id)}>Edit</button>
     </div>
   )
 }

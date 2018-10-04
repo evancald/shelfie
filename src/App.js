@@ -9,7 +9,8 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      inventory: []
+      inventory: [],
+      selected: null
     }
   }
 
@@ -20,12 +21,22 @@ class App extends Component {
       });
   }
 
+  updateSelected = (id) => {
+    let index = null;
+    this.state.inventory.forEach((product, i) => {
+      if (product.id === id) {
+        index = i;
+      }
+    })
+    this.setState({selected: this.state.inventory[index]});
+  }
+
   render() {
     return (
       <div>
-        <Dashboard inventory={this.state.inventory} getProducts={this.componentDidMount()} />
-        <Form getProducts={this.componentDidMount()}/>
         <Header />
+        <Dashboard inventory={this.state.inventory} getProducts={this.componentDidMount()} updateSelected={this.updateSelected}/>
+        <Form getProducts={this.componentDidMount()} selected={this.state.selected}/>
       </div>
     );
   }
