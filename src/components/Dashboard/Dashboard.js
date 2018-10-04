@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Product from '../Product/Product';
 import axios from 'axios';
+import '../../App.css';
 
 class Dashboard extends Component {
 
@@ -18,8 +19,7 @@ class Dashboard extends Component {
       )
     })
     return (
-      <div>
-        Dashboard
+      <div className="dashboard-container">
         {inventory}
       </div>
     )

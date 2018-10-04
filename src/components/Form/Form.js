@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import '../../App.css';
 
 class Form extends Component {
   constructor() {
@@ -46,15 +47,23 @@ class Form extends Component {
 
   render() {
     return (
-      <div>
-        Form:
-        <img src={this.state.img} alt="current product" height="100px" width="100px" />
-        <input onChange={(e) => this.handleChange(e.target.value, 'name')} value={this.state.name} placeholder="Name"></input>
-        <input onChange={(e) => this.handleChange(e.target.value, 'price')} value={this.state.price} placeholder="Price"></input>
-        <input onChange={(e) => this.handleChange(e.target.value, 'img')} value={this.state.img} placeholder="Img URL"></input>
-        <button onClick={this.resetInputs}>Cancel</button>
-        <button onClick={this.onSubmit}>Add to Inventory</button>
-        <button onClick={() => this.onConfirmEdit(this.state.id)}>Save Changes</button>
+      <div className="form-container">
+        <div className="form-image">
+          <img src={this.state.img} alt="current product" height="100px" width="100px" />
+        </div>
+        <div>
+          <h5>Name:</h5>
+          <input onChange={(e) => this.handleChange(e.target.value, 'name')} value={this.state.name} placeholder="Name"></input>
+          <h5>Price:</h5>
+          <input onChange={(e) => this.handleChange(e.target.value, 'price')} value={this.state.price} placeholder="Price"></input>
+          <h5>Img URL:</h5>
+          <input onChange={(e) => this.handleChange(e.target.value, 'img')} value={this.state.img} placeholder="Img URL"></input>
+        </div>
+        <div className="form-buttons-container">
+          <button className="form-button" onClick={this.resetInputs}>Cancel</button>
+          <button className="form-button" onClick={this.onSubmit}>Add to Inventory</button>
+          <button className="form-button" onClick={() => this.onConfirmEdit(this.state.id)}>Save Changes</button>
+        </div>
       </div>
     )
   }
