@@ -33,16 +33,21 @@ class Form extends Component {
       name: this.state.name,
       price: this.state.price,
       img: this.state.img
-    }).then(this.props.getProducts, this.resetInputs());
+    }).then(() => {
+      this.props.getProducts();
+      this.resetInputs()
+    });
   }
 
   onConfirmEdit = (id) => {
-    //const id = this.state.selected.id;
     axios.put(`http://localhost:8080/api/product/${id}`, {
       name: this.state.name,
       price: this.state.price,
       img: this.state.img
-    }).then(this.props.getProducts, this.resetInputs());
+    }).then(() => {
+      this.props.getProducts();
+      this.resetInputs()
+    });
   }
 
   render() {
@@ -61,8 +66,7 @@ class Form extends Component {
         </div>
         <div className="form-buttons-container">
           <button className="form-button" onClick={this.resetInputs}>Cancel</button>
-          <button className="form-button" onClick={this.onSubmit}>Add to Inventory</button>
-          <button className="form-button" onClick={() => this.onConfirmEdit(this.state.id)}>Save Changes</button>
+          {this.state.selected ? <button className="form-button" onClick={() => this.onConfirmEdit(this.state.id)}>Save Changes</button> : <button className="form-button" onClick={this.onSubmit}>Add to Inventory</button> }
         </div>
       </div>
     )

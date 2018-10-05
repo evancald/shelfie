@@ -6,11 +6,14 @@ import '../../App.css';
 class Dashboard extends Component {
 
   deleteProduct = (id) => {
-    axios.delete(`http://localhost:8080/api/product/${id}`).then(this.props.getProducts);
+    console.log('[in deleteProduct]')
+    axios.delete(`http://localhost:8080/api/product/${id}`)
+      .then(() => this.props.getProducts());
   }
 
   render() {
     const {updateSelected} = this.props;
+    console.log("inventory", this.props.inventory)
     const inventory = this.props.inventory.map((product, i) => {
       return (
         <div key={i}>

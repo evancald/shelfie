@@ -15,9 +15,15 @@ class App extends Component {
   }
 
   componentDidMount = () => {
+    this.getProducts()
+  }
+
+  getProducts = () => {
+    console.log('getting products...');
     axios.get('http://localhost:8080/api/inventory')
       .then(response => {
         this.setState({inventory: response.data});
+        console.log('got products!');
       });
   }
 
@@ -36,8 +42,8 @@ class App extends Component {
       <div>
         <Header />
         <div className="main-content-container">
-          <Dashboard inventory={this.state.inventory} getProducts={this.componentDidMount()} updateSelected={this.updateSelected}/>
-          <Form getProducts={this.componentDidMount()} selected={this.state.selected}/>
+          <Dashboard inventory={this.state.inventory} getProducts={this.getProducts} updateSelected={this.updateSelected}/>
+          <Form getProducts={this.getProducts} selected={this.state.selected}/>
         </div>
       </div>
     );

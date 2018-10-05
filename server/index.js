@@ -1,24 +1,25 @@
+require('dotenv').config({ path: __dirname + '/.env' });
 const express = require('express');
 const bodyParser = require('body-parser');
 const controller = require('./controller');
 const massive = require('massive');
 const cors = require('cors');
-require('dotenv').config();
 const port = 8080;
 
+
 const app = express();
-app.use(bodyParser.json());
 app.use(cors());
+app.use(bodyParser.json());
 
 //Stuff to make errors go away
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Methods", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
- next();
-});
+// app.use(function(req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header("Access-Control-Allow-Methods", "*");
+//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//  next();
+// });
 
-massive(process.env.DATABASE_STRING)
+massive(process.env.DATABASE_STRING, { scripts: __dirname + '/db' })
   .then(db => {
     app.set('db', db)
     console.log('database is connected');
