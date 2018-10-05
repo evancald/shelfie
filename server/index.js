@@ -8,16 +8,9 @@ const port = 8080;
 
 
 const app = express();
-app.use(cors());
+app.use(cors()); //This has to be the first middleware we add!!!
 app.use(bodyParser.json());
 
-//Stuff to make errors go away
-// app.use(function(req, res, next) {
-//   res.header("Access-Control-Allow-Origin", "*");
-//   res.header("Access-Control-Allow-Methods", "*");
-//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-//  next();
-// });
 
 massive(process.env.DATABASE_STRING, { scripts: __dirname + '/db' })
   .then(db => {

@@ -19,11 +19,9 @@ class App extends Component {
   }
 
   getProducts = () => {
-    console.log('getting products...');
     axios.get('http://localhost:8080/api/inventory')
       .then(response => {
         this.setState({inventory: response.data});
-        console.log('got products!');
       });
   }
 
