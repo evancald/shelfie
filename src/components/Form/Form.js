@@ -3,7 +3,6 @@ import axios from 'axios';
 import '../../App.css';
 import placeholderImage from '../../assets/placeholder.png'
 import Header from '../Header/Header';
-import {Link, Redirect} from 'react-router-dom';
 
 class Form extends Component {
   constructor() {
@@ -43,6 +42,7 @@ class Form extends Component {
 
   resetInputs = () => {
     this.setState({name: "", price: 0, img: "", id: 0});
+    this.props.history.push("/");
   }
 
   onSubmit = () => {
@@ -71,6 +71,7 @@ class Form extends Component {
     return (
       <div>
         <Header />
+        <div className="form-outer-container">
         <div className="form-container">
           <div>
             {this.state.img ? <img className="form-image" src={this.state.img} alt="current product" /> : <img className="form-image" src={placeholderImage} alt="placeholder pic" />}
@@ -90,9 +91,10 @@ class Form extends Component {
             </div>
           </div>
           <div className="form-buttons-container">
-            <button className="form-button" onClick={this.resetInputs}><Link to="/">Cancel</Link></button>
+            <button className="form-button" onClick={this.resetInputs}>Cancel</button>
             {(this.props.match.path === "/edit/:id") ? <button className="form-button" onClick={() => this.onConfirmEdit(this.state.id)}> Save Changes </button> : <button className="form-button" onClick={this.onSubmit}> Add to Inventory </button> }
           </div>
+        </div>
         </div>
       </div>
     )

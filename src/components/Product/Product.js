@@ -16,7 +16,9 @@ function Product(props) {
         </div>
         <div className="product-button-container">
           <button className="product-button" onClick={() => props.deleteProduct(id)}>Delete</button>
-          <Link className="product-button" to={`/edit/${id}`}>Edit</Link>
+          <button className="product-button">
+            <Link to={`/edit/${id}`}>Edit</Link>
+          </button>
         </div>
       </div>
     </div>
