@@ -19,7 +19,11 @@ class Dashboard extends Component {
   getProducts = () => {
     axios.get('http://localhost:8080/api/inventory')
       .then(response => {
-        this.setState({inventory: response.data});
+        const sortedResponse = response.data.sort(function(a, b) {
+          return a.name.localeCompare(b.name)
+        }
+        )
+        this.setState({inventory: sortedResponse});
       });
   }
 
