@@ -2,26 +2,46 @@ import React, { Component } from 'react';
 import Product from '../Product/Product';
 import axios from 'axios';
 import '../../App.css';
+import Header from '../Header/Header';
 
 class Dashboard extends Component {
+  constructor() {
+    super()
+    this.state = {
+      inventory: []
+    }
+  }
+
+  componentDidMount = () => {
+    this.getProducts()
+  }
+
+  getProducts = () => {
+    axios.get('http://localhost:8080/api/inventory')
+      .then(response => {
+        this.setState({inventory: response.data});
+      });
+  }
 
   deleteProduct = (id) => {
     axios.delete(`http://localhost:8080/api/product/${id}`)
-      .then(() => this.props.getProducts());
+      .then(() => this.getProducts());
   }
 
   render() {
-    const {updateSelected} = this.props;
-    const inventory = this.props.inventory.map((product, i) => {
+    const inventory = this.state.inventory.map((product, i) => {
       return (
         <div key={i}>
-          <Product name={product.name} price={product.price} img={product.img} id={product.id} deleteProduct={this.deleteProduct} updateSelected={updateSelected}/>
+          <Product name={product.name} price={product.price} img={product.img} id={product.id} deleteProduct={this.deleteProduct} />
         </div>
       )
     })
     return (
-      <div className="dashboard-container">
-        {inventory}
+      <div>
+        <Header />
+        <div className="dashboard-container">
+          {inventory}
+        </div>
       </div>
     )
   }

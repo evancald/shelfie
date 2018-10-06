@@ -4,6 +4,12 @@ module.exports = {
       res.status(200).send(response)
     })
   },
+  readProduct: (req, res) => {
+    const productId = req.params.id;
+    req.app.get('db').get_product([productId]).then( response => {
+      res.status(200).send(response);
+    })
+  },
   create: (req, res) => {
     const {name, price, img} = req.body;
     req.app.get('db').create_product([name, price, img]).then( () => {

@@ -23,6 +23,7 @@ massive(process.env.DATABASE_STRING, { scripts: __dirname + '/db' })
 
 //Endpoints
 app.get('/api/inventory', controller.read);
+app.get('/api/product/:id', controller.readProduct);
 app.post('/api/product', controller.create);
 app.delete('/api/product/:id', controller.delete);
 app.put('/api/product/:id', controller.update);
